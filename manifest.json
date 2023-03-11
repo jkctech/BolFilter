@@ -7,7 +7,7 @@
 	"permissions": [
 		"webRequest",
 		"declarativeNetRequest",
-		"activeTab"
+		"storage"
 	],
 	"background": {
 		"service_worker": "background.js"
@@ -16,17 +16,11 @@
 		"*://*.bol.com/*",
 		"*://bol.com/*"
 	],
-	"content_scripts": [
-		{
-			"matches": [
-				"*://*.bol.com/*",
-				"*://bol.com/*"
-			],
-			"run_at": "document_start",
-			"js": ["app.js"],
-			"css": ["style.css"]
-		}
-	],
+	"action": {
+		"default_icon": "icon/icon.png",
+		"default_title": "BolFilter",
+		"default_popup": "menu.html"
+	},
 	"icons": {
 		"16": "icon/icon16.png",
 		"48": "icon/icon48.png",

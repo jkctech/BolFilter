@@ -1,18 +1,24 @@
-var ruleID = 1;
-
+// Disable filter
 function disable()
 {
+	// Disable filter
 	chrome.declarativeNetRequest.updateDynamicRules({
-		removeRuleIds: [ruleID]
+		removeRuleIds: [1]
 	});
+
+	// Store to settings
+	chrome.storage.local.set({ enabled: false });
 }
 
+// Enable filter
 function enable()
 {
+	// Enable filter
+	// Adds "sellerid=0" to requests to filter out resellers
 	chrome.declarativeNetRequest.updateDynamicRules({
 		addRules:[
 			{
-				"id" : ruleID,
+				"id" : 1,
 				"priority": 1,
 				"action" : {
 					"type" : "redirect",
@@ -27,34 +33,27 @@ function enable()
 				"condition" : {
 					"urlFilter" : "searchtext=",
 					"domains" : ["bol.com", "*.bol.com"],
-					"resourceTypes" : ["main_frame", "script", "xmlhttprequest", "other"]
+					"resourceTypes" : ["main_frame", "sub_frame", "script", "xmlhttprequest", "object", "websocket", "other"]
 				}
 			}
 		],
-		removeRuleIds: [ruleID]
+		removeRuleIds: [1]
 	});
+
+	// Store to settings
+	chrome.storage.local.set({ enabled: true });
 }
 
+// Handle messages from the front
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse)
 	{
-		if (request.greeting === "bf_enable")
-		{
+		if (request === "bf_enable")
 			enable();
-			sendResponse({farewell: "enabled"});
-			console.log("Enabled");
-		}
-		else if (request.greeting === "bf_disable")
-		{
+		else if (request === "bf_disable")
 			disable();
-			sendResponse({farewell: "disabled"});
-			console.log("Disabled");
-		}
-		else
-		{
-			console.log(request.greeting);
-		}
 	}
 );
 
+// Enable on load
 enable();

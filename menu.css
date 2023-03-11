@@ -1,0 +1,81 @@
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	font-size: 15px;
+}
+
+.icon {
+	width: 12px;
+	height: 12px;
+}
+
+hr {
+	width: 100%;
+	color: darkgrey;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.footer {
+	margin-bottom: 5px;
+}
+
+.title {
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+	margin: 5px 0;
+}
+
+/* Switch */
+input[type=checkbox] {
+	height: 0;
+	width: 0;
+	display: none;
+}
+
+.toggle {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 50px;
+	height: 25px;
+	background: grey;
+	display: block;
+	border-radius: 25px;
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.toggle:after {
+	content: '';
+	position: absolute;
+	top: 1.25px;
+	left: 1.25px;
+	width: 22.5px;
+	height: 22.5px;
+	background: #fff;
+	border-radius: 22.5px;
+	transition: 0.3s;
+}
+
+input:checked + .toggle {
+	background: #bada55;
+}
+
+input:checked + .toggle:after {
+	left: calc(100% - 1.25px);
+	transform: translateX(-100%);
+}
+/* End Switch */
