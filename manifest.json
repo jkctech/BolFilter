@@ -1,0 +1,35 @@
+{
+	"name": "BolFilter",
+	"version": "1.0.0",
+	"description": "Filter onderverkopers uit de resultaten van Bol.com",
+	"author": "JKCTech",
+	"manifest_version": 3,
+	"permissions": [
+		"webRequest",
+		"declarativeNetRequest",
+		"activeTab"
+	],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"host_permissions": [
+		"*://*.bol.com/*",
+		"*://bol.com/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.bol.com/*",
+				"*://bol.com/*"
+			],
+			"run_at": "document_start",
+			"js": ["app.js"],
+			"css": ["style.css"]
+		}
+	],
+	"icons": {
+		"16": "icon/icon16.png",
+		"48": "icon/icon48.png",
+		"128": "icon/icon128.png"
+	}
+}
